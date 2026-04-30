@@ -1,0 +1,28 @@
+{
+  "name": "malabarii",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Malabarii multi-vendor quick commerce monorepo.",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace server\" \"npm run dev --workspace client\"",
+    "build": "npm run build --workspace client",
+    "start": "npm run start --workspace server",
+    "lint": "npm run lint --workspace client && npm run lint --workspace server",
+    "test": "npm test --workspace server",
+    "db:migrate": "node server/src/scripts/migrate.js",
+    "db:seed": "node server/src/scripts/seed.js",
+    "format": "prettier --write \"**/*.{js,jsx,json,md,css}\""
+  },
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "prettier": "^3.2.5"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}
