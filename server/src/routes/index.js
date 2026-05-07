@@ -6,10 +6,12 @@ import categoryRoutes from './category.routes.js';
 import orderRoutes from './order.routes.js';
 import offerRoutes from './offer.routes.js';
 import productRoutes from './product.routes.js';
+import publicRoutes from './public.routes.js';
 import vendorRoutes from './vendor.routes.js';
 
 const router = Router();
 
+router.use('/', publicRoutes);
 router.use('/auth', authRoutes);
 router.use('/addresses', addressRoutes);
 router.use('/admin', adminRoutes);

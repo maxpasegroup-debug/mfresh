@@ -169,6 +169,28 @@ CREATE TABLE IF NOT EXISTS banners (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+CREATE TABLE IF NOT EXISTS contacts (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name VARCHAR(100) NOT NULL,
+  mobile VARCHAR(15) NOT NULL,
+  email VARCHAR(150),
+  subject VARCHAR(60) NOT NULL,
+  message TEXT NOT NULL,
+  status VARCHAR(30) DEFAULT 'new',
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS hotel_leads (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  hotel_name VARCHAR(150) NOT NULL,
+  owner_name VARCHAR(100) NOT NULL,
+  mobile VARCHAR(15) NOT NULL,
+  city VARCHAR(100) NOT NULL,
+  business_type VARCHAR(30) NOT NULL,
+  status VARCHAR(30) DEFAULT 'new',
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
 CREATE INDEX IF NOT EXISTS idx_products_vendor ON products(vendor_id);
 CREATE INDEX IF NOT EXISTS idx_products_category ON products(category_id);
 CREATE INDEX IF NOT EXISTS idx_products_active ON products(is_active);
@@ -180,6 +202,8 @@ CREATE INDEX IF NOT EXISTS idx_order_items_vendor ON order_items(vendor_id);
 CREATE INDEX IF NOT EXISTS idx_otp_mobile ON otp_logs(mobile);
 CREATE INDEX IF NOT EXISTS idx_otp_expires ON otp_logs(expires_at);
 CREATE INDEX IF NOT EXISTS idx_vendors_active ON vendors(is_active, is_approved);
+CREATE INDEX IF NOT EXISTS idx_contacts_created ON contacts(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_hotel_leads_created ON hotel_leads(created_at DESC);
 
 INSERT INTO users (mobile, name, role, pin_hash)
 VALUES ('9999999999', 'Super Admin', 'admin', '$2b$10$placeholder_replace_with_real_hash')

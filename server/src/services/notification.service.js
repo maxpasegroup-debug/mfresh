@@ -44,4 +44,15 @@ export const notificationService = {
       `Malabarii: Congratulations! ${shopName} is now live on Malabarii. Start selling today!`,
     );
   },
+
+  sendAdminNotification(message) {
+    const adminMobile = process.env.ADMIN_MOBILE;
+
+    if (!adminMobile) {
+      console.log(`Malabarii admin notification: ${message}`);
+      return { success: true, skipped: true };
+    }
+
+    return sendSms(adminMobile, message);
+  },
 };

@@ -37,6 +37,14 @@ import AdminCategoriesPage from './pages/admin/AdminCategoriesPage.jsx';
 import AdminOrdersPage from './pages/admin/AdminOrdersPage.jsx';
 import AdminOffersPage from './pages/admin/AdminOffersPage.jsx';
 import AdminSettingsPage from './pages/admin/AdminSettingsPage.jsx';
+import PublicLayout from './components/layout/PublicLayout.jsx';
+import LandingPage from './pages/public/LandingPage.jsx';
+import FeaturesPage from './pages/public/FeaturesPage.jsx';
+import HotelPage from './pages/public/HotelPage.jsx';
+import PublicVendorPage from './pages/public/VendorPage.jsx';
+import ContactPage from './pages/public/ContactPage.jsx';
+import PrivacyPage from './pages/public/PrivacyPage.jsx';
+import TermsPage from './pages/public/TermsPage.jsx';
 
 function PrivateRoute({ children, roles }) {
   const user = useAuthStore((state) => state.user);
@@ -55,13 +63,33 @@ function PrivateRoute({ children, roles }) {
 
 function RootRedirect() {
   const user = useAuthStore((state) => state.user);
-  return <Navigate to={user ? '/home' : '/auth/mobile'} replace />;
+
+  if (!user) {
+    return <LandingPage />;
+  }
+
+  const pathByRole = {
+    admin: '/admin',
+    vendor: '/vendor-dashboard',
+    user: '/home',
+  };
+
+  return <Navigate to={pathByRole[user.role] || '/home'} replace />;
 }
 
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<RootRedirect />} />
+      <Route element={<PublicLayout />}>
+        <Route path="/" element={<RootRedirect />} />
+        <Route path="/features" element={<FeaturesPage />} />
+        <Route path="/for-hotels" element={<HotelPage />} />
+        <Route path="/sell-with-us" element={<PublicVendorPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+      </Route>
+
       <Route path="/auth" element={<AuthLayout />}>
         <Route index element={<Navigate to="/auth/mobile" replace />} />
         <Route path="mobile" element={<MobilePage />} />
