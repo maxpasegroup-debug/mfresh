@@ -14,7 +14,55 @@ const clientBuildCandidates = [
 ];
 const clientBuildPath =
   clientBuildCandidates.find((candidate) => existsSync(candidate)) || clientBuildCandidates[0];
-const allowedOrigins = ['http://localhost:5173', process.env.CLIENT_URL].filter(Boolean);
+const allowedOrigins = buildAllowedOrigins([
+  'http://localhost:5173',
+  'http://localhost:5000',
+  process.env.CLIENT_URL,
+  process.env.CORS_ORIGINS,
+  process.env.RAILWAY_PUBLIC_DOMAIN,
+  process.env.RAILWAY_STATIC_URL,
+]);
+
+function normalizeOrigin(value) {
+  if (!value) {
+    return null;
+  }
+
+  const trimmed = value.trim().replace(/\/+$/, '');
+
+  if (!trimmed) {
+    return null;
+  }
+
+  try {
+    const withProtocol = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+    const url = new URL(withProtocol);
+    return url.origin;
+  } catch {
+    return null;
+  }
+}
+
+function buildAllowedOrigins(values) {
+  return new Set(
+    values
+      .flatMap((value) => String(value || '').split(','))
+      .map(normalizeOrigin)
+      .filter(Boolean),
+  );
+}
+
+function isAllowedOrigin(origin) {
+  const normalizedOrigin = normalizeOrigin(origin);
+
+  if (!normalizedOrigin) {
+    return true;
+  }
+
+  const { hostname } = new URL(normalizedOrigin);
+
+  return allowedOrigins.has(normalizedOrigin) || hostname.endsWith('.up.railway.app');
+}
 
 app.set('trust proxy', 1);
 app.use(helmet());
@@ -26,7 +74,7 @@ app.use((req, res, next) => {
 app.use(
   cors({
     origin: (origin, cb) => {
-      if (!origin || allowedOrigins.includes(origin)) {
+      if (isAllowedOrigin(origin)) {
         cb(null, true);
       } else {
         cb(new Error('Not allowed by CORS'));
