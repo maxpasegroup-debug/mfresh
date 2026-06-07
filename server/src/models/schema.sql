@@ -126,6 +126,7 @@ CREATE TABLE IF NOT EXISTS orders (
   payment_status VARCHAR(20) DEFAULT 'pending',
   payment_method VARCHAR(30),
   is_hotel_order BOOLEAN DEFAULT false,
+  delivery_slot VARCHAR(80),
   gst_invoice_url TEXT,
   notes TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW(),
@@ -140,6 +141,9 @@ CREATE TABLE IF NOT EXISTS order_items (
   name VARCHAR(200) NOT NULL,
   price NUMERIC(10,2) NOT NULL,
   quantity INTEGER NOT NULL,
+  selected_weight VARCHAR(20),
+  cleaning_option VARCHAR(30),
+  unit_multiplier NUMERIC(6,2) DEFAULT 1,
   subtotal NUMERIC(10,2) NOT NULL,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -205,17 +209,22 @@ CREATE INDEX IF NOT EXISTS idx_vendors_active ON vendors(is_active, is_approved)
 CREATE INDEX IF NOT EXISTS idx_contacts_created ON contacts(created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_hotel_leads_created ON hotel_leads(created_at DESC);
 
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS delivery_slot VARCHAR(80);
+ALTER TABLE order_items ADD COLUMN IF NOT EXISTS selected_weight VARCHAR(20);
+ALTER TABLE order_items ADD COLUMN IF NOT EXISTS cleaning_option VARCHAR(30);
+ALTER TABLE order_items ADD COLUMN IF NOT EXISTS unit_multiplier NUMERIC(6,2) DEFAULT 1;
+
 INSERT INTO users (mobile, name, role, pin_hash)
 VALUES ('9999999999', 'Super Admin', 'admin', '$2b$10$placeholder_replace_with_real_hash')
 ON CONFLICT (mobile) DO NOTHING;
 
 INSERT INTO categories (name, slug, sort_order) VALUES
-  ('Dairy', 'dairy', 1),
-  ('Vegetables', 'vegetables', 2),
-  ('Fruits', 'fruits', 3),
-  ('Oils & Ghee', 'oils-ghee', 4),
-  ('Grains & Rice', 'grains-rice', 5),
-  ('Eggs', 'eggs', 6),
-  ('Spices', 'spices', 7),
-  ('Hygiene', 'hygiene', 8)
+  ('Fresh Fish', 'fresh-fish', 1),
+  ('Prawns & Shrimp', 'prawns-shrimp', 2),
+  ('Crab & Shellfish', 'crab-shellfish', 3),
+  ('Squid & Cuttlefish', 'squid-cuttlefish', 4),
+  ('Premium Cuts', 'premium-cuts', 5),
+  ('Family Combos', 'family-combos', 6),
+  ('Curry Cuts', 'curry-cuts', 7),
+  ('Dry Fish', 'dry-fish', 8)
 ON CONFLICT (slug) DO NOTHING;

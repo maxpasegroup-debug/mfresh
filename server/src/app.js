@@ -90,7 +90,7 @@ app.use('/api/auth/send-otp', otpLimiter);
 app.use('/api/auth', authLimiter);
 
 app.get('/health', (_req, res) => {
-  res.json({ status: 'ok', service: 'malabarii-api' });
+  res.json({ status: 'ok', service: 'mfresh-api' });
 });
 
 app.get('/api/health', (_req, res) => {

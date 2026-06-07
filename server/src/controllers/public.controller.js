@@ -12,7 +12,7 @@ export const createContact = asyncHandler(async (req, res) => {
   );
 
   await notificationService.sendAdminNotification(
-    `Malabarii contact: ${name} (${mobile}) - ${subject}`,
+    `MFresh contact: ${name} (${mobile}) - ${subject}`,
   );
 
   res.status(201).json({ success: true });
@@ -28,7 +28,7 @@ export const createHotelEnquiry = asyncHandler(async (req, res) => {
   );
 
   await notificationService.sendAdminNotification(
-    `Malabarii hotel lead: ${hotelName}, ${ownerName}, ${mobile}, ${city}`,
+    `MFresh legacy hotel lead: ${hotelName}, ${ownerName}, ${mobile}, ${city}`,
   );
 
   res.status(201).json({ success: true });

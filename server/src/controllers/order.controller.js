@@ -40,10 +40,33 @@ function validateOffer(offer, subtotal) {
   }
 }
 
+function normalizeSeafoodOptions(item) {
+  const allowedWeights = new Map([
+    ['500g', 0.5],
+    ['1kg', 1],
+    ['2kg', 2],
+  ]);
+  const allowedCleaning = new Set(['cleaned', 'curry_cut', 'steak_cut', 'whole']);
+  const selectedWeight = allowedWeights.has(item.selected_weight) ? item.selected_weight : '1kg';
+  const cleaningOption = allowedCleaning.has(item.cleaning_option) ? item.cleaning_option : 'cleaned';
+  const unitMultiplier = Number(item.unit_multiplier || allowedWeights.get(selectedWeight));
+
+  if (!Number.isFinite(unitMultiplier) || unitMultiplier <= 0 || unitMultiplier > 5) {
+    throw httpError(400, 'Invalid selected weight');
+  }
+
+  return {
+    selected_weight: selectedWeight,
+    cleaning_option: cleaningOption,
+    unit_multiplier: unitMultiplier,
+  };
+}
+
 export const createOrder = asyncHandler(async (req, res) => {
-  const { address_id, items, offer_code } = req.body;
+  const { address_id, items, offer_code, delivery_slot } = req.body;
   if (!address_id) throw httpError(400, 'address_id is required');
   if (!Array.isArray(items) || items.length === 0) throw httpError(400, 'items are required');
+  if (!delivery_slot) throw httpError(400, 'delivery_slot is required');
 
   const productIds = items.map((item) => item.product_id);
   const products = await productModel.findManyByIds(productIds);
@@ -57,7 +80,8 @@ export const createOrder = asyncHandler(async (req, res) => {
     if (!Number.isInteger(quantity) || quantity < 1) throw httpError(400, 'Invalid quantity');
     if (product.stock < quantity) throw httpError(400, `${product.name} is out of stock`);
 
-    const itemSubtotal = Number(product.price) * quantity;
+    const seafoodOptions = normalizeSeafoodOptions(item);
+    const itemSubtotal = Number(product.price) * seafoodOptions.unit_multiplier * quantity;
     subtotal += itemSubtotal;
     return {
       product_id: product.id,
@@ -65,6 +89,7 @@ export const createOrder = asyncHandler(async (req, res) => {
       name: product.name,
       price: product.price,
       quantity,
+      ...seafoodOptions,
       subtotal: itemSubtotal,
     };
   });
@@ -97,11 +122,10 @@ export const createOrder = asyncHandler(async (req, res) => {
       offer_id: offer?.id,
       razorpay_order_id: razorpayOrder.id,
       payment_status: 'pending',
+      delivery_slot,
     },
     orderItems,
   );
-
-  await Promise.all(items.map((item) => productModel.adjustStock(item.product_id, -Number(item.quantity))));
 
   const user = await userModel.findById(req.user.userId);
   res.status(201).json({
@@ -111,7 +135,7 @@ export const createOrder = asyncHandler(async (req, res) => {
       order_id: order.razorpay_order_id,
       amount: Math.round(total * 100),
       currency: 'INR',
-      name: 'Malabarii',
+      name: 'MFresh',
       description: order.order_number,
       prefill: { contact: user?.mobile },
     },
@@ -122,12 +146,29 @@ export const verifyPayment = asyncHandler(async (req, res) => {
   const order = await orderModel.findById(req.params.id);
   if (!order) throw httpError(404, 'Order not found');
   if (order.user_id !== req.user.userId && req.user.role !== 'admin') throw httpError(403, 'Forbidden');
+  if (order.payment_status === 'paid') {
+    return res.json({ success: true, order });
+  }
 
   const isValid = razorpayService.verifyPayment(req.body);
   if (!isValid) {
     await orderModel.update(order.id, { payment_status: 'failed' });
     throw httpError(400, 'Invalid payment signature');
   }
+
+  const productIds = (order.items || []).map((item) => item.product_id);
+  const products = await productModel.findManyByIds(productIds);
+  const productMap = new Map(products.map((product) => [product.id, product]));
+
+  for (const item of order.items || []) {
+    const product = productMap.get(item.product_id);
+    if (!product || !product.is_active) throw httpError(400, `${item.name} is no longer available`);
+    if (product.stock < Number(item.quantity)) throw httpError(400, `${item.name} is out of stock`);
+  }
+
+  await Promise.all(
+    (order.items || []).map((item) => productModel.adjustStock(item.product_id, -Number(item.quantity))),
+  );
 
   const updated = await orderModel.update(order.id, {
     payment_status: 'paid',
@@ -186,11 +227,10 @@ export const cancelOrder = asyncHandler(async (req, res) => {
       order_id: order.id,
     });
     update.payment_status = 'refunded';
+    await Promise.all(
+      order.items.map((item) => productModel.adjustStock(item.product_id, Number(item.quantity))),
+    );
   }
-
-  await Promise.all(
-    order.items.map((item) => productModel.adjustStock(item.product_id, Number(item.quantity))),
-  );
 
   const updated = await orderModel.update(order.id, update);
   res.json({ order: updated });

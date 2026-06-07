@@ -6,7 +6,7 @@ import { query, pool } from '../models/db.js';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 async function migrate() {
-  console.log('Running Malabarii migrations...');
+  console.log('Running MFresh migrations...');
 
   try {
     if (!process.env.DATABASE_URL) {

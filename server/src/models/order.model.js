@@ -15,11 +15,22 @@ const orderFields = [
   'payment_status',
   'payment_method',
   'is_hotel_order',
+  'delivery_slot',
   'gst_invoice_url',
   'notes',
 ];
 
-const itemFields = ['product_id', 'vendor_id', 'name', 'price', 'quantity', 'subtotal'];
+const itemFields = [
+  'product_id',
+  'vendor_id',
+  'name',
+  'price',
+  'quantity',
+  'selected_weight',
+  'cleaning_option',
+  'unit_multiplier',
+  'subtotal',
+];
 
 export async function generateOrderNumber() {
   const dateResult = await query(`SELECT TO_CHAR(NOW(), 'YYMMDD') AS stamp`);

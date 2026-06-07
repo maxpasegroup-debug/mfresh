@@ -4,8 +4,6 @@ import { Link, NavLink } from 'react-router-dom';
 const links = [
   ['Home', '/'],
   ['Features', '/features'],
-  ['For Hotels', '/for-hotels'],
-  ['Sell With Us', '/sell-with-us'],
   ['Contact', '/contact'],
 ];
 
@@ -32,7 +30,7 @@ export default function PublicNavbar() {
             to="/"
             className="bg-gradient-to-r from-brand-greenDark to-brand-greenLight bg-clip-text font-display text-3xl font-black text-transparent"
           >
-            Malabarii
+            MFresh
           </Link>
           <div className="hidden items-center gap-8 lg:flex">
             {links.map(([label, path]) => (
@@ -54,7 +52,7 @@ export default function PublicNavbar() {
               Login
             </Link>
             <Link to="/auth/mobile" className="rounded-2xl bg-brand-green px-5 py-2 text-sm font-black text-white shadow-btn">
-              Get Started
+              Order Fish
             </Link>
           </div>
           <button
@@ -81,7 +79,7 @@ export default function PublicNavbar() {
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="font-display text-3xl font-black text-brand-green">Malabarii</span>
+            <span className="font-display text-3xl font-black text-brand-green">MFresh</span>
             <button type="button" onClick={() => setOpen(false)} className="text-2xl text-brand-muted" aria-label="Close menu">
               ×
             </button>
@@ -103,7 +101,7 @@ export default function PublicNavbar() {
               Login
             </Link>
             <Link to="/auth/mobile" onClick={() => setOpen(false)} className="rounded-2xl bg-brand-green py-3 text-center font-black text-white">
-              Get Started
+              Order Fish
             </Link>
           </div>
         </aside>

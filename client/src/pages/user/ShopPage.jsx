@@ -79,27 +79,27 @@ export default function ShopPage() {
   return (
     <>
       <TopHeader
-        title="Shop"
-        subtitle={`${total} products`}
-        rightActions={[{ label: 'Cart', icon: cartCount ? `🧺${cartCount}` : '🧺', onClick: () => navigate('/cart') }]}
+        title="Seafood"
+        subtitle={`${total} fresh items`}
+        rightActions={[{ label: 'Cart', icon: cartCount ? `Cart ${cartCount}` : 'Cart', onClick: () => navigate('/cart') }]}
       />
       <section className="section space-y-4">
         <input
           value={searchInput}
           onChange={(event) => setSearchInput(event.target.value)}
-          placeholder="Search fresh products"
+          placeholder="Search fish, prawns, crab..."
           className="h-12 w-full rounded-3xl border border-brand-border bg-white px-4 text-sm font-bold outline-none focus:border-brand-green"
         />
         <div className="scroll-row">
           <CategoryPill
-            category={{ name: 'All', emoji: '🧺' }}
+            category={{ name: 'All', emoji: 'All' }}
             active={!params.category}
             onClick={() => updateParam('category', '')}
           />
           {categories.map((category) => (
             <CategoryPill
               key={category.id}
-              category={{ ...category, emoji: category.emoji || '🥬' }}
+              category={{ ...category, emoji: category.emoji || 'Fish' }}
               active={params.category === (category.slug || category.id)}
               onClick={() => updateParam('category', category.slug || category.id)}
             />
@@ -126,7 +126,7 @@ export default function ShopPage() {
             {allProducts.map((product) => <ProductCard key={product.id} product={product} />)}
           </div>
         ) : (
-          <EmptyState emoji="🔎" title="No products found" subtitle="Try a different search or category." />
+          <EmptyState emoji="Fish" title="No seafood found" subtitle="Try a different search or category." />
         )}
         <div ref={loaderRef} className="h-10" />
         {loading && page > 1 ? <SkeletonCard /> : null}

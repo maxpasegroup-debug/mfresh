@@ -2,29 +2,29 @@ import bcrypt from 'bcrypt';
 import { query, pool } from '../models/db.js';
 
 const categories = [
-  ['Dairy', 'dairy', 'milk', 1],
-  ['Vegetables', 'vegetables', 'leafy', 2],
-  ['Fruits', 'fruits', 'banana', 3],
-  ['Oils & Ghee', 'oils-ghee', 'oil', 4],
-  ['Grains & Rice', 'grains-rice', 'rice', 5],
-  ['Eggs', 'eggs', 'egg', 6],
-  ['Spices', 'spices', 'spice', 7],
-  ['Hygiene', 'hygiene', 'soap', 8],
+  ['Fresh Fish', 'fresh-fish', 'fish', 1],
+  ['Prawns & Shrimp', 'prawns-shrimp', 'prawns', 2],
+  ['Crab & Shellfish', 'crab-shellfish', 'crab', 3],
+  ['Squid & Cuttlefish', 'squid-cuttlefish', 'squid', 4],
+  ['Premium Cuts', 'premium-cuts', 'seer', 5],
+  ['Family Combos', 'family-combos', 'combo', 6],
+  ['Curry Cuts', 'curry-cuts', 'curry', 7],
+  ['Dry Fish', 'dry-fish', 'dry', 8],
 ];
 
 const products = [
-  ['Thiruvizha Fresh Milk 500ml', 'dairy', 34, 40, '500ml'],
-  ['Palakkad Tomatoes 1kg', 'vegetables', 42, 55, '1kg'],
-  ['Wayanad Banana 1 Dozen', 'fruits', 58, 70, '12 pcs'],
-  ['Malabar Coconut Oil 500ml', 'oils-ghee', 155, 180, '500ml'],
-  ['Matta Rice 5kg', 'grains-rice', 285, 330, '5kg'],
-  ['Country Eggs 12pcs', 'eggs', 96, 110, '12 pcs'],
-  ['Kerala Black Pepper 100g', 'spices', 125, 150, '100g'],
-  ['Natural Handwash 500ml', 'hygiene', 89, 110, '500ml'],
+  ['Seer Fish', 'premium-cuts', 780, 860, '1kg'],
+  ['Pearl Spot Karimeen', 'fresh-fish', 520, 600, '1kg'],
+  ['Sardine Mathi', 'fresh-fish', 180, 220, '1kg'],
+  ['King Prawns', 'prawns-shrimp', 640, 720, '1kg'],
+  ['Fresh Crab', 'crab-shellfish', 460, 540, '1kg'],
+  ['Squid', 'squid-cuttlefish', 420, 490, '1kg'],
+  ['Curry Cut Fish Combo', 'family-combos', 350, 420, '1kg'],
+  ['Dry Anchovy', 'dry-fish', 260, 320, '1kg'],
 ];
 
 async function seed() {
-  console.log('Seeding Malabarii database...');
+  console.log('Seeding MFresh database...');
 
   try {
     if (!process.env.DATABASE_URL) {
@@ -63,13 +63,13 @@ async function seed() {
     const vendorPinHash = await bcrypt.hash('1234', 12);
     const vendorUser = await query(
       `INSERT INTO users (mobile, name, role, pin_hash)
-       VALUES ('9888888888', 'Sample Vendor', 'vendor', $1)
+       VALUES ('9888888888', 'MFresh Operations', 'vendor', $1)
        RETURNING id`,
       [vendorPinHash],
     );
     const vendor = await query(
       `INSERT INTO vendors (user_id, shop_name, city, pincode, is_active, is_approved)
-       VALUES ($1, 'Malabar Fresh Mart', 'Kozhikode', '673001', true, true)
+       VALUES ($1, 'MFresh Seafood Hub', 'Kochi', '682001', true, true)
        RETURNING id`,
       [vendorUser.rows[0].id],
     );
@@ -86,7 +86,7 @@ async function seed() {
           category.rows[0].id,
           name,
           `${categorySlug}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-          `Fresh ${name} from trusted Malabar suppliers`,
+          `Fresh ${name} sourced daily, cleaned to customer preference, and packed chilled by MFresh.`,
           price,
           mrp,
           unit,

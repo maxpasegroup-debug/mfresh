@@ -6,22 +6,14 @@ import Input from '../../components/ui/Input.jsx';
 import { useAuthStore } from '../../store/authStore.js';
 import { useUiStore } from '../../store/uiStore.js';
 
-const roles = [
-  { id: 'individual', title: 'Individual', emoji: '🏠', mode: 'individual' },
-  { id: 'hotel', title: 'Hotel', emoji: '🍽️', mode: 'hotel' },
-  { id: 'vendor', title: 'Vendor', emoji: '🏪', mode: 'individual' },
-];
-
 export default function RolePage() {
   const navigate = useNavigate();
   const loginSuccess = useAuthStore((state) => state.loginSuccess);
   const showToast = useUiStore((state) => state.showToast);
   const [name, setName] = useState('');
-  const [selected, setSelected] = useState('individual');
   const [loading, setLoading] = useState(false);
 
   const continueNext = async () => {
-    const role = roles.find((item) => item.id === selected);
     const pin = sessionStorage.getItem('mb_auth_pin') || '';
     const otpToken = sessionStorage.getItem('mb_otp_token') || '';
 
@@ -32,10 +24,9 @@ export default function RolePage() {
 
     setLoading(true);
     try {
-      const response = await authApi.setPin(name.trim(), pin, role.mode, otpToken);
+      const response = await authApi.setPin(name.trim(), pin, 'individual', otpToken);
       loginSuccess(response.data);
-      const userRole = response.data.user.role;
-      navigate(userRole === 'admin' ? '/admin' : userRole === 'vendor' ? '/vendor-dashboard' : '/home');
+      navigate('/home');
     } catch (error) {
       showToast(error.response?.data?.message || 'Could not create account', 'error');
       setLoading(false);
@@ -45,26 +36,13 @@ export default function RolePage() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="font-display text-3xl font-black text-brand-text">Who are you?</h2>
-        <p className="mt-2 text-sm font-semibold text-brand-muted">Choose the best account mode</p>
+        <h2 className="font-display text-3xl font-black text-brand-text">Create your MFresh account</h2>
+        <p className="mt-2 text-sm font-semibold text-brand-muted">Fresh seafood orders will be saved to this profile.</p>
       </div>
       <Input label="Your name" value={name} onChange={(event) => setName(event.target.value)} />
-      <div className="grid gap-3">
-        {roles.map((role) => (
-          <button
-            key={role.id}
-            type="button"
-            onClick={() => setSelected(role.id)}
-            className={`flex items-center gap-4 rounded-3xl border p-4 text-left transition ${
-              selected === role.id
-                ? 'border-brand-green bg-brand-green text-white'
-                : 'border-brand-border bg-white text-brand-text'
-            }`}
-          >
-            <span className="text-3xl">{role.emoji}</span>
-            <span className="text-lg font-black">{role.title}</span>
-          </button>
-        ))}
+      <div className="rounded-3xl border border-brand-border bg-white p-4">
+        <p className="text-sm font-black text-brand-text">Customer account</p>
+        <p className="mt-1 text-xs font-bold text-brand-muted">Direct MFresh seafood ordering with weight, cleaning, and delivery slot preferences.</p>
       </div>
       <Button fullWidth loading={loading} onClick={continueNext}>
         Continue

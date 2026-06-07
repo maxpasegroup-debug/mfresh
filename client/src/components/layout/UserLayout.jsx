@@ -11,11 +11,11 @@ export default function UserLayout() {
   const count = useCartStore((state) => state.getCount());
   const { toast, modal, hideModal } = useUiStore();
   const items = [
-    { id: 'home', icon: '🏠', label: 'Home', path: '/home' },
-    { id: 'shop', icon: '🛒', label: 'Shop', path: '/shop' },
-    { id: 'orders', icon: '📦', label: 'Orders', path: '/orders' },
-    { id: 'cart', icon: '🧺', label: 'Cart', path: '/cart', badge: count || null },
-    { id: 'profile', icon: '👤', label: 'Profile', path: '/profile' },
+    { id: 'home', icon: 'Home', label: 'Home', path: '/home' },
+    { id: 'shop', icon: 'Fish', label: 'Seafood', path: '/shop' },
+    { id: 'orders', icon: 'Bag', label: 'Orders', path: '/orders' },
+    { id: 'cart', icon: 'Cart', label: 'Cart', path: '/cart', badge: count || null },
+    { id: 'profile', icon: 'You', label: 'Profile', path: '/profile' },
   ];
 
   return (

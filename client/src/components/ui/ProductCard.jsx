@@ -1,21 +1,42 @@
-import { memo, useCallback } from 'react';
-import { useAuthStore } from '../../store/authStore.js';
-import { useCartStore } from '../../store/cartStore.js';
+import { memo, useCallback, useMemo, useState } from 'react';
+import { cartItemKey, useCartStore } from '../../store/cartStore.js';
 import Button from './Button.jsx';
 
+const weightOptions = [
+  { label: '500g', value: '500g', multiplier: 0.5 },
+  { label: '1kg', value: '1kg', multiplier: 1 },
+  { label: '2kg', value: '2kg', multiplier: 2 },
+];
+
+const cleaningOptions = [
+  { label: 'Cleaned', value: 'cleaned' },
+  { label: 'Curry cut', value: 'curry_cut' },
+  { label: 'Steak cut', value: 'steak_cut' },
+  { label: 'Whole fish', value: 'whole' },
+];
+
 function ProductCard({ product }) {
-  const user = useAuthStore((state) => state.user);
-  const quantity = useCartStore((state) => state.items[product.id]?.quantity || 0);
+  const [selectedWeight, setSelectedWeight] = useState('1kg');
+  const [cleaningOption, setCleaningOption] = useState('cleaned');
+  const selectedWeightConfig = weightOptions.find((option) => option.value === selectedWeight) || weightOptions[1];
+  const key = useMemo(
+    () => cartItemKey(product.id, { selectedWeight, cleaningOption }),
+    [cleaningOption, product.id, selectedWeight],
+  );
+  const quantity = useCartStore((state) => state.items[key]?.quantity || 0);
   const addItem = useCartStore((state) => state.addItem);
   const removeItem = useCartStore((state) => state.removeItem);
-  const add = useCallback(() => addItem(product), [addItem, product]);
-  const remove = useCallback(() => removeItem(product.id), [removeItem, product.id]);
+  const add = useCallback(
+    () => addItem(product, { selectedWeight, cleaningOption, unitMultiplier: selectedWeightConfig.multiplier }),
+    [addItem, cleaningOption, product, selectedWeight, selectedWeightConfig.multiplier],
+  );
+  const remove = useCallback(() => removeItem(key), [key, removeItem]);
   const discount =
     product.mrp && product.price
       ? Math.max(0, Math.round(((Number(product.mrp) - Number(product.price)) / Number(product.mrp)) * 100))
       : 0;
   const image = product.images?.[0]?.url || product.image_url;
-  const hotelMode = user?.mode === 'hotel';
+  const displayPrice = Math.round(Number(product.price || 0) * selectedWeightConfig.multiplier);
 
   return (
     <article className="card overflow-hidden">
@@ -25,29 +46,52 @@ function ProductCard({ product }) {
             {discount}% OFF
           </span>
         ) : null}
-        {hotelMode ? (
-          <span className="absolute right-2 top-2 z-10 rounded-full bg-brand-yellow px-2 py-1 text-[10px] font-black text-brand-text">
-            Bulk
-          </span>
-        ) : null}
+        <span className="absolute right-2 top-2 z-10 rounded-full bg-white px-2 py-1 text-[10px] font-black text-brand-green shadow-card">
+          Fresh
+        </span>
         {image ? (
           <img src={image} alt={product.name} className="h-full w-full object-cover" />
         ) : (
-          <div className="flex h-full items-center justify-center text-5xl">{product.emoji || '🥬'}</div>
+          <div className="flex h-full items-center justify-center text-4xl font-black text-brand-green">Fish</div>
         )}
       </div>
       <div className="p-3">
-        <p className="truncate text-xs font-bold text-brand-muted">{product.vendor_name || 'Malabarii'}</p>
+        <p className="truncate text-xs font-bold text-brand-muted">MFresh inspected</p>
         <h3 className="mt-1 line-clamp-2 min-h-[40px] text-sm font-black text-brand-text">{product.name}</h3>
-        <p className="mt-1 text-xs text-brand-muted">{product.unit}</p>
-        {hotelMode && product.bulk_price ? (
-          <p className="mt-1 text-xs font-black text-brand-orange">Bulk: ₹{product.bulk_price}</p>
-        ) : null}
+        <p className="mt-1 text-xs text-brand-muted">Base price per kg</p>
+
+        <div className="mt-3 grid grid-cols-2 gap-2">
+          <select
+            value={selectedWeight}
+            onChange={(event) => setSelectedWeight(event.target.value)}
+            className="h-9 rounded-2xl border border-brand-border bg-white px-2 text-xs font-black text-brand-text outline-none"
+          >
+            {weightOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+          <select
+            value={cleaningOption}
+            onChange={(event) => setCleaningOption(event.target.value)}
+            className="h-9 rounded-2xl border border-brand-border bg-white px-2 text-xs font-black text-brand-text outline-none"
+          >
+            {cleaningOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
         <div className="mt-3 flex items-center justify-between gap-2">
           <div>
-            <span className="text-base font-black text-brand-text">₹{product.price}</span>
+            <span className="text-base font-black text-brand-text">Rs {displayPrice}</span>
             {product.mrp ? (
-              <span className="ml-1 text-xs font-bold text-brand-muted line-through">₹{product.mrp}</span>
+              <span className="ml-1 text-xs font-bold text-brand-muted line-through">
+                Rs {Math.round(Number(product.mrp) * selectedWeightConfig.multiplier)}
+              </span>
             ) : null}
           </div>
           {quantity > 0 ? (

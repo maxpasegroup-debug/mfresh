@@ -15,7 +15,7 @@ export function verifyOtp(otp, hash) {
 
 export async function sendOtp(mobile, otp) {
   if (process.env.NODE_ENV !== 'production') {
-    console.log(`Malabarii OTP for ${mobile}: ${otp}`);
+    console.log(`MFresh OTP for ${mobile}: ${otp}`);
     return { success: true, dev: true, otp };
   }
 

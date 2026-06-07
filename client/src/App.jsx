@@ -24,7 +24,6 @@ import OrderDetailPage from './pages/user/OrderDetailPage.jsx';
 import CartPage from './pages/user/CartPage.jsx';
 import CheckoutPage from './pages/user/CheckoutPage.jsx';
 import ProfilePage from './pages/user/ProfilePage.jsx';
-import VendorPage from './pages/user/VendorPage.jsx';
 import VendorHomePage from './pages/vendor/VendorHomePage.jsx';
 import VendorProductsPage from './pages/vendor/VendorProductsPage.jsx';
 import VendorOrdersPage from './pages/vendor/VendorOrdersPage.jsx';
@@ -40,8 +39,6 @@ import AdminSettingsPage from './pages/admin/AdminSettingsPage.jsx';
 import PublicLayout from './components/layout/PublicLayout.jsx';
 import LandingPage from './pages/public/LandingPage.jsx';
 import FeaturesPage from './pages/public/FeaturesPage.jsx';
-import HotelPage from './pages/public/HotelPage.jsx';
-import PublicVendorPage from './pages/public/VendorPage.jsx';
 import ContactPage from './pages/public/ContactPage.jsx';
 import PrivacyPage from './pages/public/PrivacyPage.jsx';
 import TermsPage from './pages/public/TermsPage.jsx';
@@ -83,8 +80,8 @@ function AppRoutes() {
       <Route element={<PublicLayout />}>
         <Route path="/" element={<RootRedirect />} />
         <Route path="/features" element={<FeaturesPage />} />
-        <Route path="/for-hotels" element={<HotelPage />} />
-        <Route path="/sell-with-us" element={<PublicVendorPage />} />
+        <Route path="/for-hotels" element={<Navigate to="/" replace />} />
+        <Route path="/sell-with-us" element={<Navigate to="/" replace />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/terms" element={<TermsPage />} />
@@ -113,7 +110,7 @@ function AppRoutes() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/vendor/:id" element={<VendorPage />} />
+        <Route path="/vendor/:id" element={<Navigate to="/shop" replace />} />
       </Route>
 
       <Route

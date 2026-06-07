@@ -1,56 +1,44 @@
 export const categories = [
-  ['🥛', 'Dairy', '120+'],
-  ['🥬', 'Vegetables', '80+'],
-  ['🍎', 'Fruits', '60+'],
-  ['🫙', 'Oils & Ghee', '40+'],
-  ['🌾', 'Grains & Rice', '50+'],
-  ['🥚', 'Eggs', '15+'],
-  ['🌶️', 'Spices', '90+'],
-  ['🧴', 'Hygiene', '70+'],
+  ['Fish', 'Fresh Fish', '40+'],
+  ['Prawns', 'Prawns & Shrimp', '18+'],
+  ['Crab', 'Crab & Shellfish', '12+'],
+  ['Squid', 'Squid & Cuttlefish', '10+'],
+  ['Seer', 'Premium Cuts', '16+'],
+  ['Combo', 'Family Combos', '8+'],
+  ['Curry', 'Curry Cuts', '20+'],
+  ['Dry', 'Dry Fish', '14+'],
 ];
 
 export const features = [
-  ['⚡', 'Lightning Fast', 'Order before 10PM, get delivery by 7AM next morning.'],
-  ['🌿', 'Farm Fresh', 'Direct from local farms and trusted vendors in Kerala.'],
-  ['💰', 'Best Prices', 'Competitive pricing with regular discounts and festival offers.'],
-  ['🏪', 'Multi-Vendor', 'Shop from multiple trusted local vendors in one order.'],
-  ['🔐', 'Secure Payments', '100% secure payments powered by Razorpay.'],
-  ['📱', 'Easy Reordering', 'Save your favourites and reorder daily essentials in one tap.'],
+  ['Fresh', 'Dock-Fresh Seafood', 'Sourced every morning, chilled through handling, and delivered fast.'],
+  ['Clean', 'Cleaned Your Way', 'Choose whole, cleaned, curry cut, steak cut, or boneless where available.'],
+  ['Weight', 'Buy by Weight', 'Select 500g, 1kg, or family packs before adding fish to cart.'],
+  ['Slot', 'Delivery Slots', 'Pick a same-day or next-day slot that works for your kitchen.'],
+  ['Pay', 'Secure Payments', 'UPI, cards, wallets, and netbanking powered by Razorpay.'],
+  ['Trust', 'MFresh Quality Check', 'Every order is checked for freshness before dispatch.'],
 ];
 
 export const steps = [
-  ['1', '🔍', 'Browse & Pick', 'Choose from 500+ fresh products across 8 categories.'],
-  ['2', '💳', 'Pay Securely', 'Multiple payment options via Razorpay, including UPI, cards, and wallets.'],
-  ['3', '🚀', 'Fast Delivery', 'Get your order delivered fresh to your doorstep.'],
+  ['1', 'Pick', 'Choose Seafood', 'Select fish, weight, and cleaning preference.'],
+  ['2', 'Slot', 'Pick Delivery Slot', 'Choose a convenient chilled delivery window.'],
+  ['3', 'Cook', 'Cook Fresh', 'Receive ready-to-cook seafood at your doorstep.'],
 ];
 
 export const testimonials = [
   [
-    'I get fresh milk and vegetables every morning without fail. Malabarii has made my life so much easier!',
-    'Priya Nair, Kozhikode',
+    'The curry-cut seer fish arrived clean, fresh, and ready for lunch. Exactly what I wanted.',
+    'Anjali Nair, Kochi',
   ],
   [
-    'As a hotel owner, the bulk pricing and GST invoices save us so much time every month.',
-    'Arun Menon, Hotel Paradise, Thrissur',
+    'MFresh saves me the fish-market trip. Weight selection and cleaning options are very useful.',
+    'Rahul Menon, Kozhikode',
   ],
   [
-    'The quality is amazing and delivery is always on time. Best app for fresh groceries in Kerala!',
-    'Fatima Beevi, Malappuram',
+    'Prawns were chilled, well packed, and delivered in the selected slot. Solid service.',
+    'Fathima Beevi, Malappuram',
   ],
 ];
 
-export const hotelBenefits = [
-  'Bulk order discounts',
-  'GST-compliant invoices',
-  'Credit limit up to ₹50,000',
-  'Dedicated account manager',
-  'Priority morning delivery',
-  'Custom recurring orders',
-];
+export const hotelBenefits = [];
 
-export const hotelStats = [
-  ['500+', 'Hotels served'],
-  ['₹50L+', 'Monthly GMV'],
-  ['99.2%', 'On-time delivery'],
-  ['4.9★', 'Average rating'],
-];
+export const hotelStats = [];

@@ -4,66 +4,68 @@ import FeatureCard from '../../components/public/FeatureCard.jsx';
 import PhoneMockup from '../../components/public/PhoneMockup.jsx';
 import StepCard from '../../components/public/StepCard.jsx';
 import TestimonialCard from '../../components/public/TestimonialCard.jsx';
-import { categories, features, hotelBenefits, steps, testimonials } from './publicData.js';
+import { categories, features, steps, testimonials } from './publicData.js';
 
 export default function LandingPage() {
   const navigate = useNavigate();
 
   return (
     <main>
-      <section className="relative overflow-hidden bg-gradient-to-br from-white via-brand-bg to-green-50">
-        <div className="absolute right-[-8rem] top-28 h-[28rem] w-[28rem] rounded-full bg-brand-fresh/20 blur-3xl" />
+      <section className="relative overflow-hidden bg-gradient-to-br from-sky-50 via-white to-emerald-50">
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 md:py-24 lg:grid-cols-[1.1fr_0.9fr] lg:px-8">
           <div className="animate-fade-in">
             <span className="inline-flex rounded-full border border-brand-border bg-white px-4 py-2 text-sm font-black text-brand-green shadow-card">
-              🌿 Kerala&apos;s #1 Fresh Delivery App
+              Fresh seafood, cleaned and delivered
             </span>
             <h1 className="mt-8 font-display text-[3rem] font-black leading-[0.95] text-brand-text md:text-7xl">
-              Good Food,
+              MFresh
               <br />
-              Rich Life.
+              Seafood Daily.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-brand-muted">
-              Order fresh dairy, vegetables and daily essentials from trusted local vendors. Delivered to your door in minutes.
+              Order fresh fish, prawns, crab, squid, and seafood combos by weight. Pick cleaning style and delivery slot before checkout.
             </p>
             <div className="mt-8 grid gap-3 sm:flex">
               <Link to="/auth/mobile" className="rounded-2xl bg-brand-green px-8 py-4 text-center text-lg font-black text-white shadow-btn">
-                Order Now →
+                Order Fresh Fish
               </Link>
-              <button type="button" className="rounded-2xl border border-brand-green px-8 py-4 text-lg font-black text-brand-green">
-                🍎 📱 Download App
+              <button
+                type="button"
+                onClick={() => navigate('/shop')}
+                className="rounded-2xl border border-brand-green px-8 py-4 text-lg font-black text-brand-green"
+              >
+                View Seafood
               </button>
             </div>
             <p className="mt-6 text-sm font-black text-brand-muted">
-              ⭐ 4.8 rating • 10,000+ happy customers • 500+ products
+              Same-day slots | Hygienic cleaning | Chilled delivery | Secure payment
             </p>
           </div>
-          <div className="relative min-h-[640px]">
+          <div className="relative min-h-[620px]">
             <div className="absolute left-2 top-10 z-10 rounded-3xl bg-white px-4 py-3 font-black text-brand-text shadow-modal">
-              ⭐ 4.9 Heritage Dairy
+              Curry cut selected
             </div>
             <div className="absolute right-0 top-24 z-10 rounded-3xl bg-white px-4 py-3 font-black text-brand-text shadow-modal">
-              🥛 Milk delivered by 7AM
+              1kg seer fish
             </div>
             <div className="absolute bottom-16 left-0 z-10 rounded-3xl bg-white px-4 py-3 font-black text-brand-green shadow-modal">
-              ✅ Order placed!
+              Slot: 6PM - 8PM
             </div>
             <PhoneMockup />
           </div>
         </div>
       </section>
 
-      <div className="overflow-hidden bg-gradient-to-r from-brand-orange to-brand-yellow py-4 text-lg font-black text-white">
+      <div className="overflow-hidden bg-gradient-to-r from-brand-green to-cyan-600 py-4 text-lg font-black text-white">
         <div className="whitespace-nowrap animate-[marquee_24s_linear_infinite]">
-          🎉 Free delivery above ₹199 • 🥛 Fresh dairy by 7AM • 🌿 Farm to door daily • 🏨 Special B2B rates for hotels • 🎉 Free delivery above ₹199
+          Fresh fish by weight | Cleaning options | Same-day delivery slots | Free delivery above Rs 199 | MFresh seafood daily
         </div>
       </div>
 
       <HowItWorks />
       <CategoriesSection />
       <FeaturesSection />
-      <HotelsSection />
-      <VendorCta />
+      <QualitySection />
       <TestimonialsSection />
       <AppDownload onWeb={() => navigate('/auth/mobile')} />
     </main>
@@ -74,8 +76,8 @@ export function HowItWorks() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-20 lg:px-8">
       <div className="text-center">
-        <h2 className="font-display text-4xl font-black text-brand-text md:text-5xl">From Farm to Your Door</h2>
-        <p className="mt-3 text-lg text-brand-muted">Three simple steps</p>
+        <h2 className="font-display text-4xl font-black text-brand-text md:text-5xl">Seafood Without the Market Trip</h2>
+        <p className="mt-3 text-lg text-brand-muted">Three simple choices before checkout</p>
       </div>
       <div className="relative mt-12 grid gap-6 md:grid-cols-3">
         <div className="absolute left-[16%] right-[16%] top-20 hidden border-t-2 border-dotted border-brand-border md:block" />
@@ -92,7 +94,7 @@ export function CategoriesSection() {
     <section id="categories" className="bg-white px-4 py-20">
       <div className="mx-auto max-w-7xl">
         <h2 className="text-center font-display text-4xl font-black text-brand-text md:text-5xl">
-          Everything Fresh, Everything Daily
+          Fresh Catch Categories
         </h2>
         <div className="mt-12 grid grid-cols-2 gap-4 lg:grid-cols-4">
           {categories.map(([emoji, name, count]) => (
@@ -101,7 +103,7 @@ export function CategoriesSection() {
         </div>
         <div className="mt-10 text-center">
           <Link to="/shop" className="rounded-2xl bg-brand-green px-8 py-4 font-black text-white shadow-btn">
-            Browse All Products →
+            Browse Seafood
           </Link>
         </div>
       </div>
@@ -113,7 +115,7 @@ export function FeaturesSection() {
   return (
     <section id="features" className="mx-auto max-w-7xl px-4 py-20 lg:px-8">
       <h2 className="text-center font-display text-4xl font-black text-brand-text md:text-5xl">
-        Why Families & Hotels Choose Us
+        Built for Fresh Seafood Orders
       </h2>
       <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {features.map(([icon, title, description]) => (
@@ -124,45 +126,19 @@ export function FeaturesSection() {
   );
 }
 
-function HotelsSection() {
+function QualitySection() {
+  const points = ['Freshness checked before packing', 'Cleaned as selected', 'Packed chilled', 'Delivered in your slot'];
   return (
-    <section id="hotels" className="bg-brand-greenDark text-white">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 lg:grid-cols-2 lg:px-8">
-        <div>
-          <span className="rounded-full bg-white/10 px-4 py-2 text-sm font-black">🏨 B2B Solution</span>
-          <h2 className="mt-6 font-display text-4xl font-black md:text-5xl">Running a Hotel or Restaurant?</h2>
-          <p className="mt-5 max-w-xl text-lg leading-8 text-white/75">
-            Get bulk pricing, GST invoices, credit limits and dedicated account management.
-          </p>
-          <div className="mt-8 grid gap-3 text-lg font-bold text-white/90">
-            {hotelBenefits.map((item) => (
-              <p key={item}>✅ {item}</p>
-            ))}
-          </div>
-          <Link to="/for-hotels" className="mt-8 inline-flex rounded-2xl bg-brand-orange px-7 py-4 font-black text-white">
-            Apply for Hotel Account →
-          </Link>
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          {[
-            ['Hotels served', { count: 500, suffix: '+' }],
-            ['Monthly GMV', { count: 50, prefix: '₹', suffix: 'L+' }],
-            ['On-time delivery', { count: 99.2, suffix: '%', decimals: 1 }],
-            ['Average rating', { count: 4.9, suffix: '★', decimals: 1 }],
-          ].map(([label, stat]) => (
-            <div key={label} className="rounded-4xl bg-white/10 p-6 text-center">
-              <p
-                className="font-display text-4xl font-black"
-                data-count-to={stat.count}
-                data-prefix={stat.prefix || ''}
-                data-suffix={stat.suffix || ''}
-                data-decimals={stat.decimals || 0}
-              >
-                {stat.prefix || ''}
-                {stat.count}
-                {stat.suffix || ''}
-              </p>
-              <p className="mt-2 text-sm font-bold text-white/70">{label}</p>
+    <section className="bg-brand-greenDark px-4 py-20 text-white">
+      <div className="mx-auto max-w-7xl">
+        <span className="rounded-full bg-white/10 px-4 py-2 text-sm font-black">MFresh Promise</span>
+        <h2 className="mt-6 max-w-3xl font-display text-4xl font-black md:text-5xl">
+          Fish-first operations, from sourcing to doorstep.
+        </h2>
+        <div className="mt-10 grid gap-4 md:grid-cols-4">
+          {points.map((point) => (
+            <div key={point} className="rounded-3xl bg-white/10 p-5 text-lg font-black">
+              {point}
             </div>
           ))}
         </div>
@@ -171,30 +147,10 @@ function HotelsSection() {
   );
 }
 
-function VendorCta() {
-  return (
-    <section className="bg-green-50 px-4 py-20 text-center">
-      <h2 className="font-display text-4xl font-black text-brand-text">Sell Your Products on Malabarii</h2>
-      <p className="mt-3 text-lg text-brand-muted">Join 24+ vendors already growing their business</p>
-      <div className="mx-auto mt-8 flex max-w-3xl flex-wrap justify-center gap-3">
-        {['📈 Grow your sales', '🛡️ Secure weekly payouts', '📊 Real-time analytics'].map((item) => (
-          <span key={item} className="rounded-full bg-white px-5 py-3 font-black text-brand-green shadow-card">
-            {item}
-          </span>
-        ))}
-      </div>
-      <Link to="/sell-with-us" className="mt-8 inline-flex rounded-2xl bg-brand-green px-8 py-4 font-black text-white shadow-btn">
-        Start Selling →
-      </Link>
-      <p className="mt-3 text-sm font-bold text-brand-muted">Free to join • No setup fee</p>
-    </section>
-  );
-}
-
 function TestimonialsSection() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-20 lg:px-8">
-      <h2 className="text-center font-display text-4xl font-black text-brand-text">Loved by Families Across Kerala</h2>
+      <h2 className="text-center font-display text-4xl font-black text-brand-text">Loved by Seafood Families</h2>
       <div className="mt-10 flex gap-5 overflow-x-auto md:grid md:grid-cols-3">
         {testimonials.map(([quote, author]) => (
           <TestimonialCard key={author} quote={quote} author={author} />
@@ -207,21 +163,13 @@ function TestimonialsSection() {
 function AppDownload({ onWeb }) {
   return (
     <section className="bg-white px-4 py-20 text-center">
-      <h2 className="font-display text-4xl font-black text-brand-text">Get the Malabarii App</h2>
-      <p className="mt-3 text-brand-muted">Available soon on Android & iOS</p>
+      <h2 className="font-display text-4xl font-black text-brand-text">Start with MFresh Web</h2>
+      <p className="mt-3 text-brand-muted">Mobile apps can come later. The seafood ordering flow is ready for web customers.</p>
       <div className="mt-10">
         <PhoneMockup compact />
       </div>
-      <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-        {['🍎 App Store', '📱 Play Store'].map((item) => (
-          <button key={item} type="button" className="relative rounded-2xl bg-brand-text px-7 py-4 font-black text-white">
-            {item}
-            <span className="absolute -right-2 -top-2 rounded-full bg-brand-yellow px-2 py-1 text-xs text-brand-text">Soon</span>
-          </button>
-        ))}
-      </div>
-      <button type="button" onClick={onWeb} className="mt-5 rounded-2xl border border-brand-green px-7 py-4 font-black text-brand-green">
-        Use on Web →
+      <button type="button" onClick={onWeb} className="mt-8 rounded-2xl bg-brand-green px-8 py-4 font-black text-white shadow-btn">
+        Order on Web
       </button>
     </section>
   );
