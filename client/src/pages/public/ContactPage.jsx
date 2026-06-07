@@ -15,9 +15,11 @@ export default function ContactPage() {
 
   return (
     <main>
-      <section className="bg-gradient-to-br from-white to-green-50 px-4 py-20 text-center">
-        <h1 className="font-display text-5xl font-black text-brand-text md:text-6xl">Contact Malabarii</h1>
-        <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-brand-muted">Questions, partnerships, orders, or vendor help. We are here Monday to Saturday.</p>
+      <section className="sea-section px-4 py-20 text-center">
+        <h1 className="font-display text-5xl font-black text-brand-text md:text-6xl">Contact MFresh</h1>
+        <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-brand-muted">
+          Questions about fresh seafood, cleaning options, delivery slots, pickles, or order support.
+        </p>
       </section>
 
       <section className="mx-auto grid max-w-7xl gap-8 px-4 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:px-8">
@@ -28,8 +30,8 @@ export default function ContactPage() {
           <select value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })} className="rounded-2xl border border-brand-border px-4 py-3">
             <option value="support">Support</option>
             <option value="orders">Orders</option>
-            <option value="hotel">Hotel account</option>
-            <option value="vendor">Vendor enquiry</option>
+            <option value="seafood">Seafood freshness</option>
+            <option value="pickles">MFresh Pickles</option>
             <option value="partnership">Partnership</option>
           </select>
           <textarea required value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="min-h-36 rounded-2xl border border-brand-border px-4 py-3" placeholder="Message" />
@@ -37,13 +39,13 @@ export default function ContactPage() {
           {status && <p className="font-bold text-brand-green">{status}</p>}
         </form>
         <div className="space-y-4">
-          {['📞 +91 XXXXX XXXXX', '📧 hello@malabarii.com', '📍 Kozhikode, Kerala, India', '⏰ Mon-Sat: 6AM - 10PM'].map((item) => (
+          {['+91 XXXXX XXXXX', 'hello@mfresh.in', 'Kochi, Kerala, India', 'Daily: 6AM - 10PM'].map((item) => (
             <div key={item} className="rounded-4xl bg-white p-6 text-xl font-black text-brand-text shadow-card">{item}</div>
           ))}
-          <div className="flex min-h-60 items-center justify-center rounded-4xl bg-gradient-to-br from-brand-green to-brand-fresh p-8 text-center text-white shadow-card">
+          <div className="flex min-h-60 items-center justify-center rounded-4xl bg-gradient-to-br from-brand-greenDark to-brand-green p-8 text-center text-white shadow-card">
             <div>
-              <p className="text-5xl">📍</p>
-              <p className="mt-4 text-2xl font-black">Kozhikode, Kerala, India</p>
+              <p className="font-display text-5xl font-black">MFresh</p>
+              <p className="mt-4 text-2xl font-black">Love From Malabar</p>
             </div>
           </div>
         </div>

@@ -226,5 +226,6 @@ INSERT INTO categories (name, slug, sort_order) VALUES
   ('Premium Cuts', 'premium-cuts', 5),
   ('Family Combos', 'family-combos', 6),
   ('Curry Cuts', 'curry-cuts', 7),
-  ('Dry Fish', 'dry-fish', 8)
+  ('Dry Fish', 'dry-fish', 8),
+  ('MFresh Pickles', 'mfresh-pickles', 9)
 ON CONFLICT (slug) DO NOTHING;

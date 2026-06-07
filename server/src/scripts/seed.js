@@ -10,6 +10,7 @@ const categories = [
   ['Family Combos', 'family-combos', 'combo', 6],
   ['Curry Cuts', 'curry-cuts', 'curry', 7],
   ['Dry Fish', 'dry-fish', 'dry', 8],
+  ['MFresh Pickles', 'mfresh-pickles', 'pickle', 9],
 ];
 
 const products = [
@@ -21,6 +22,9 @@ const products = [
   ['Squid', 'squid-cuttlefish', 420, 490, '1kg'],
   ['Curry Cut Fish Combo', 'family-combos', 350, 420, '1kg'],
   ['Dry Anchovy', 'dry-fish', 260, 320, '1kg'],
+  ['MFresh Fish Pickle 250g', 'mfresh-pickles', 220, 260, '250g'],
+  ['MFresh Prawn Pickle 250g', 'mfresh-pickles', 280, 340, '250g'],
+  ['MFresh Tuna Pickle 250g', 'mfresh-pickles', 240, 300, '250g'],
 ];
 
 async function seed() {

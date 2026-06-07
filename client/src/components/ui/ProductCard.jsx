@@ -39,26 +39,26 @@ function ProductCard({ product }) {
   const displayPrice = Math.round(Number(product.price || 0) * selectedWeightConfig.multiplier);
 
   return (
-    <article className="card overflow-hidden">
-      <div className="relative h-32 bg-brand-bg">
+    <article className="card overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-modal">
+      <div className="relative h-32 bg-gradient-to-br from-cyan-50 via-white to-blue-100">
         {discount > 0 ? (
           <span className="absolute left-2 top-2 z-10 rounded-full bg-brand-orange px-2 py-1 text-[10px] font-black text-white">
             {discount}% OFF
           </span>
         ) : null}
-        <span className="absolute right-2 top-2 z-10 rounded-full bg-white px-2 py-1 text-[10px] font-black text-brand-green shadow-card">
-          Fresh
+        <span className="absolute right-2 top-2 z-10 rounded-full bg-white/90 px-2 py-1 text-[10px] font-black text-brand-green shadow-card">
+          MFresh
         </span>
         {image ? (
           <img src={image} alt={product.name} className="h-full w-full object-cover" />
         ) : (
-          <div className="flex h-full items-center justify-center text-4xl font-black text-brand-green">Fish</div>
+          <div className="flex h-full items-center justify-center text-4xl font-black text-brand-green">Catch</div>
         )}
       </div>
       <div className="p-3">
-        <p className="truncate text-xs font-bold text-brand-muted">MFresh inspected</p>
+        <p className="truncate text-xs font-bold text-brand-muted">Freshness checked</p>
         <h3 className="mt-1 line-clamp-2 min-h-[40px] text-sm font-black text-brand-text">{product.name}</h3>
-        <p className="mt-1 text-xs text-brand-muted">Base price per kg</p>
+        <p className="mt-1 text-xs font-bold text-brand-muted">Price per kg | cleaned to order</p>
 
         <div className="mt-3 grid grid-cols-2 gap-2">
           <select

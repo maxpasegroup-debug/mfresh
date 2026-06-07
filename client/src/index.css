@@ -12,8 +12,8 @@
     min-width: 320px;
     min-height: 100vh;
     font-family: 'DM Sans', sans-serif;
-    background: #f4f7f4;
-    color: #1a2e1a;
+    background: #f4fbff;
+    color: #001727;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -58,6 +58,37 @@
   .card {
     @apply bg-brand-card rounded-3xl border border-brand-border;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  .sea-glass {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(215, 248, 255, 0.5));
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow: 0 24px 80px rgba(0, 23, 39, 0.22);
+    backdrop-filter: blur(18px);
+  }
+
+  .sea-section {
+    background:
+      radial-gradient(circle at 10% 10%, rgba(0, 169, 157, 0.16), transparent 32rem),
+      radial-gradient(circle at 90% 18%, rgba(0, 119, 200, 0.16), transparent 28rem),
+      linear-gradient(180deg, #f7fdff 0%, #eef9ff 100%);
+  }
+
+  .wave-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .wave-card::after {
+    content: '';
+    position: absolute;
+    inset: auto -18% -42% -18%;
+    height: 64%;
+    background:
+      radial-gradient(90% 70% at 50% 0%, rgba(255, 255, 255, 0.34), transparent 62%),
+      repeating-radial-gradient(ellipse at 50% 0%, rgba(0, 169, 157, 0.24) 0 2px, transparent 2px 18px);
+    transform: rotate(-3deg);
+    pointer-events: none;
   }
 }
 
@@ -124,6 +155,51 @@
   to {
     transform: translateX(-100%);
   }
+}
+
+@keyframes floatSea {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-1deg);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0) rotate(1deg);
+  }
+}
+
+@keyframes waveDrift {
+  from {
+    transform: translateX(-24px);
+  }
+  to {
+    transform: translateX(24px);
+  }
+}
+
+@keyframes shimmerSea {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.animate-float-sea {
+  animation: floatSea 5s ease-in-out infinite;
+}
+
+.animate-wave-drift {
+  animation: waveDrift 3.8s ease-in-out infinite alternate;
+}
+
+.sea-text-gradient {
+  background: linear-gradient(90deg, #00a99d, #0077c8, #003b5c, #00a99d);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmerSea 5s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

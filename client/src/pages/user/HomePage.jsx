@@ -9,9 +9,9 @@ import { useCartStore } from '../../store/cartStore.js';
 import { useUiStore } from '../../store/uiStore.js';
 
 const fallbackBanners = [
-  { id: 'seer', tag: 'Fresh Catch', title: 'Seer fish, cleaned your way', emoji: 'Fish', gradient: 'from-brand-green to-cyan-600', path: '/shop?search=seer' },
-  { id: 'prawn', tag: 'Ready to Cook', title: 'Prawns with shell or cleaned', emoji: 'Prawns', gradient: 'from-brand-orange to-amber-500', path: '/shop?search=prawn' },
-  { id: 'combo', tag: 'Family Pack', title: 'Seafood combos for the week', emoji: 'Combo', gradient: 'from-[#0f2027] to-[#2c5364]', path: '/shop' },
+  { id: 'seer', tag: 'Fresh Catch', title: 'Seer fish, cleaned your way', emoji: 'Wave', gradient: 'from-brand-greenDark to-brand-green', path: '/shop?search=seer' },
+  { id: 'prawn', tag: 'Ready to Cook', title: 'Prawns with shell or cleaned', emoji: 'Sea', gradient: 'from-brand-green to-brand-fresh', path: '/shop?search=prawn' },
+  { id: 'pickle', tag: 'MFresh Pickles', title: 'Coastal flavour in every jar', emoji: 'Jar', gradient: 'from-brand-orange to-amber-500', path: '/shop?search=pickle' },
 ];
 
 export default function HomePage() {
@@ -42,7 +42,7 @@ export default function HomePage() {
         <div className="flex items-center justify-between gap-3">
           <button type="button" className="text-left" onClick={() => navigate('/profile')}>
             <h1 className="font-display text-3xl font-black text-brand-green">MFresh</h1>
-            <p className="text-xs font-bold text-brand-muted">Fresh fish delivered chilled</p>
+            <p className="text-xs font-bold text-brand-muted">Seafood and pickles from Malabar</p>
           </button>
           <button type="button" onClick={() => navigate('/cart')} className="relative h-11 w-11 rounded-2xl bg-white text-xl shadow-card">
             Cart
@@ -61,7 +61,7 @@ export default function HomePage() {
 
       <div className="overflow-hidden bg-brand-green py-2 text-sm font-black text-white">
         <div className="whitespace-nowrap animate-[marquee_18s_linear_infinite]">
-          Fresh catch daily | Cleaning options | Same-day delivery slots | Free delivery above Rs 199
+          Fresh catch daily | Cleaning options | Same-day slots | MFresh Pickles exclusive
         </div>
       </div>
 
@@ -82,7 +82,7 @@ export default function HomePage() {
 
       <section className="section">
         <div className="mb-3 flex items-center justify-between">
-          <h2 className="font-display text-2xl font-black">Seafood Categories</h2>
+        <h2 className="font-display text-2xl font-black">Fresh Categories</h2>
           {categoriesLoading ? <span className="text-xs font-bold text-brand-muted">Loading</span> : null}
         </div>
         <div className="scroll-row">

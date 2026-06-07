@@ -1,16 +1,16 @@
 const sections = [
-  ['Information We Collect', 'We collect account details, mobile number, delivery addresses, order history, payment status, support messages, and device or usage information needed to run the Malabarii service.'],
-  ['How We Use Information', 'We use this information to process orders, coordinate vendors and delivery, send OTPs and service messages, improve product availability, prevent fraud, and support customer requests.'],
-  ['Payments', 'Payments are processed through secure payment partners such as Razorpay. Malabarii does not store full card numbers or sensitive payment credentials.'],
-  ['Sharing', 'We share only the information required with vendors, delivery partners, payment providers, SMS providers, and service vendors who help us operate the platform.'],
+  ['Information We Collect', 'We collect account details, mobile number, delivery addresses, order history, payment status, support messages, seafood preferences, and usage information needed to run the MFresh service.'],
+  ['How We Use Information', 'We use this information to process orders, coordinate cleaning and delivery, send OTPs and service messages, improve product availability, prevent fraud, and support customer requests.'],
+  ['Payments', 'Payments are processed through secure payment partners such as Razorpay. MFresh does not store full card numbers or sensitive payment credentials.'],
+  ['Sharing', 'We share only the information required with operations teams, delivery partners, payment providers, SMS providers, and service providers who help us operate the platform.'],
   ['Data Retention', 'We retain information for legal, tax, accounting, support, and operational requirements, including GST and order records where applicable in India.'],
   ['Your Choices', 'You can update profile information, request support, opt out of non-essential communications, and ask us to review deletion requests subject to legal retention obligations.'],
   ['Security', 'We use reasonable technical and organizational safeguards, but no online service is completely risk-free. Please keep your OTPs and PIN private.'],
-  ['Contact', 'For privacy questions, contact hello@malabarii.com or write to Malabarii, Kozhikode, Kerala, India.'],
+  ['Contact', 'For privacy questions, contact hello@mfresh.in or write to MFresh, Kochi, Kerala, India.'],
 ];
 
 export default function PrivacyPage() {
-  return <LegalPage title="Privacy Policy" intro="How Malabarii handles customer, vendor, and hotel account information." sections={sections} />;
+  return <LegalPage title="Privacy Policy" intro="How MFresh handles customer, seafood order, delivery, and support information." sections={sections} />;
 }
 
 export function LegalPage({ title, intro, sections }) {

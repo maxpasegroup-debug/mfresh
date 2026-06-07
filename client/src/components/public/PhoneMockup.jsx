@@ -1,9 +1,9 @@
 export default function PhoneMockup({ compact = false }) {
-  const categories = ['🥛', '🥬', '🍎', '🌾'];
+  const categories = ['Fish', 'Prawn', 'Crab', 'Pickle'];
   const products = [
-    ['🥛', 'Fresh Cow Milk', '₹68', '1 litre'],
-    ['🍅', 'Palakkad Tomato', '₹42', '1 kg'],
-    ['🥥', 'Coconut Oil', '₹155', '500 ml'],
+    ['Seer Fish', 'Rs 780', '1 kg | curry cut'],
+    ['King Prawns', 'Rs 640', '1 kg | cleaned'],
+    ['Fish Pickle', 'Rs 220', '250 g jar'],
   ];
 
   return (
@@ -14,29 +14,29 @@ export default function PhoneMockup({ compact = false }) {
     >
       <div className="absolute left-1/2 top-2 h-6 w-28 -translate-x-1/2 rounded-b-2xl bg-brand-greenDark" />
       <div className="h-full overflow-hidden rounded-[1.8rem] bg-brand-bg">
-        <div className="bg-gradient-to-br from-brand-greenDark to-brand-green px-4 pb-5 pt-8 text-white">
-          <p className="text-xs font-bold text-white/75">Delivering to</p>
-          <h3 className="font-display text-2xl font-black">Kozhikode</h3>
+        <div className="bg-gradient-to-br from-brand-greenDark via-brand-green to-brand-fresh px-4 pb-5 pt-8 text-white">
+          <p className="text-xs font-bold text-white/75">Delivering fresh seafood to</p>
+          <h3 className="font-display text-2xl font-black">Kochi</h3>
           <div className="mt-4 rounded-2xl bg-white px-4 py-3 text-sm font-bold text-brand-muted">
-            Search milk, tomato, rice...
+            Search fish, prawns, pickles...
           </div>
         </div>
         <div className="space-y-3 p-4">
-          <div className="rounded-3xl bg-gradient-to-br from-brand-orange to-amber-400 p-4 text-white">
-            <p className="text-xs font-black uppercase tracking-wide">Morning fresh</p>
-            <h4 className="mt-1 font-display text-2xl font-black">Dairy by 7AM</h4>
+          <div className="rounded-3xl bg-gradient-to-br from-brand-green to-cyan-500 p-4 text-white">
+            <p className="text-xs font-black uppercase tracking-wide">Today&apos;s catch</p>
+            <h4 className="mt-1 font-display text-2xl font-black">Cleaned by choice</h4>
           </div>
           <div className="grid grid-cols-4 gap-2">
-            {categories.map((icon) => (
-              <div key={icon} className="flex h-16 items-center justify-center rounded-3xl bg-white text-2xl shadow-card">
-                {icon}
+            {categories.map((label) => (
+              <div key={label} className="flex h-16 items-center justify-center rounded-3xl bg-white px-1 text-center text-[11px] font-black text-brand-green shadow-card">
+                {label}
               </div>
             ))}
           </div>
-          {products.map(([icon, name, price, unit]) => (
+          {products.map(([name, price, unit]) => (
             <div key={name} className="flex items-center gap-3 rounded-3xl bg-white p-3 shadow-card">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-bg text-3xl">
-                {icon}
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-50 text-xs font-black text-brand-green">
+                M
               </div>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-black text-brand-text">{name}</p>
