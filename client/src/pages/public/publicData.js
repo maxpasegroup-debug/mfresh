@@ -1,10 +1,10 @@
 export const categories = [
-  ['https://commons.wikimedia.org/wiki/Special:FilePath/Scomberomorus_commerson.jpg?width=700', 'Seer Fish', 'Available Today'],
-  ['https://commons.wikimedia.org/wiki/Special:FilePath/Etroplus_suratensis.jpg?width=700', 'Karimeen', 'Available Today'],
-  ['https://commons.wikimedia.org/wiki/Special:FilePath/Rastrelliger_kanagurta.jpg?width=700', 'Ayala', 'Limited Stock'],
-  ['https://commons.wikimedia.org/wiki/Special:FilePath/Penaeus_monodon.jpg?width=700', 'Tiger Prawns', 'Available Today'],
-  ['https://commons.wikimedia.org/wiki/Special:FilePath/Sepia_officinalis2.jpg?width=700', 'Squid & Cuttlefish', 'Fresh Batch'],
-  ['https://commons.wikimedia.org/wiki/Special:FilePath/Scylla_serrata.jpg?width=700', 'Crab', 'Pre-order'],
+  ['seer', 'Seer Fish', 'Available Today'],
+  ['karimeen', 'Karimeen', 'Available Today'],
+  ['ayala', 'Ayala', 'Limited Stock'],
+  ['prawns', 'Tiger Prawns', 'Available Today'],
+  ['squid', 'Squid & Cuttlefish', 'Fresh Batch'],
+  ['crab', 'Crab', 'Pre-order'],
   ['Curry', 'Curry Cuts', 'Ready to Cook'],
   ['Pickle', 'MFresh Pickles', 'Exclusive'],
 ];

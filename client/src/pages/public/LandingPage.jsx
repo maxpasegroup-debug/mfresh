@@ -2,10 +2,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import SeaHeroCanvas from '../../components/public/SeaHeroCanvas.jsx';
 
 const catchItems = [
-  ['Seer Fish', 'Premium steak or curry cut', 'Rs 699/kg', 'Available', 'https://commons.wikimedia.org/wiki/Special:FilePath/Scomberomorus_commerson.jpg?width=700'],
-  ['Tiger Prawns', 'Cleaned or shell-on', 'Rs 899/kg', 'Available', 'https://commons.wikimedia.org/wiki/Special:FilePath/Penaeus_monodon.jpg?width=700'],
-  ['Karimeen', 'Whole or cleaned', 'Rs 1199/kg', 'Available', 'https://commons.wikimedia.org/wiki/Special:FilePath/Etroplus_suratensis.jpg?width=700'],
-  ['Ayala', 'Cleaned or curry cut', 'Rs 249/kg', 'Limited', 'https://commons.wikimedia.org/wiki/Special:FilePath/Rastrelliger_kanagurta.jpg?width=700'],
+  ['Seer Fish', 'Premium steak or curry cut', 'Rs 699/kg', 'Available', 'seer'],
+  ['Tiger Prawns', 'Cleaned or shell-on', 'Rs 899/kg', 'Available', 'prawns'],
+  ['Karimeen', 'Whole or cleaned', 'Rs 1199/kg', 'Available', 'karimeen'],
+  ['Ayala', 'Cleaned or curry cut', 'Rs 249/kg', 'Limited', 'ayala'],
 ];
 
 const journey = [
@@ -16,9 +16,9 @@ const journey = [
 ];
 
 const pickleItems = [
-  ['Fish Pickle', 'Malabar masala, slow-cooked oil balance'],
-  ['Prawn Pickle', 'Spicy coastal pickle with premium prawns'],
-  ['Tuna Pickle', 'Bold, travel-ready, meal-changing flavour'],
+  ['Fish Pickle', 'Malabar masala, slow-cooked oil balance', 'fish'],
+  ['Prawn Pickle', 'Spicy coastal pickle with premium prawns', 'prawn'],
+  ['Tuna Pickle', 'Bold, travel-ready, meal-changing flavour', 'tuna'],
 ];
 
 const trust = ['Fresh Seafood', 'From Malabar Coast', 'Made With Love', 'Fast Delivery', 'Trust & Quality'];
@@ -55,16 +55,7 @@ function Hero({ onOrder, onCatch }) {
       <SeaHeroCanvas />
       <div className="absolute inset-0 bg-gradient-to-b from-brand-greenDark/30 via-brand-greenDark/20 to-brand-greenDark/88" />
       <div className="relative z-10 mx-auto flex min-h-[92vh] max-w-7xl flex-col justify-between px-4 pb-8 pt-10 lg:px-8">
-        <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/12 font-display text-2xl font-black text-white shadow-card">
-              M
-            </div>
-            <div>
-              <p className="font-display text-3xl font-black tracking-tight">MFresh</p>
-              <p className="text-xs font-bold uppercase tracking-[0.28em] text-cyan-100">Love From Malabar</p>
-            </div>
-          </Link>
+        <div className="flex justify-end">
           <button type="button" onClick={onCatch} className="hidden rounded-2xl border border-white/35 px-5 py-3 text-sm font-black text-white backdrop-blur md:block">
             Today&apos;s Catch
           </button>
@@ -102,15 +93,10 @@ function Hero({ onOrder, onCatch }) {
               <span className="rounded-full bg-brand-orange px-3 py-1 text-xs font-black text-white">Live</span>
             </div>
             <div className="mt-5 grid gap-3 sm:grid-cols-2">
-              {catchItems.map(([name, detail, price, status, image], index) => (
+              {catchItems.map(([name, detail, price, status, visual]) => (
                 <article key={name} className="overflow-hidden rounded-3xl bg-white shadow-card">
                   <div className="relative h-28 bg-cyan-50">
-                    <img
-                      src={image}
-                      alt={name}
-                      loading={index < 2 ? 'eager' : 'lazy'}
-                      className="h-full w-full object-cover"
-                    />
+                    <SeafoodVisual type={visual} compact />
                     <span className={`absolute left-2 top-2 rounded-full px-2 py-1 text-[10px] font-black text-white ${status === 'Limited' ? 'bg-brand-orange' : 'bg-brand-green'}`}>
                       {status}
                     </span>
@@ -145,6 +131,67 @@ function CatchTicker() {
   );
 }
 
+function SeafoodVisual({ type, compact = false }) {
+  const isPrawn = type === 'prawns';
+  const isKarimeen = type === 'karimeen';
+  const isAyala = type === 'ayala';
+  const fishTone = isKarimeen
+    ? 'from-amber-300 via-cyan-400 to-brand-green'
+    : isAyala
+      ? 'from-slate-300 via-brand-green to-brand-greenDark'
+      : 'from-brand-greenDark via-brand-green to-brand-fresh';
+
+  return (
+    <div className={`relative overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-blue-100 ${compact ? 'h-full' : 'h-40'}`}>
+      <div className="absolute inset-x-0 bottom-0 h-20 animate-wave-drift bg-[radial-gradient(ellipse_at_center,_rgba(0,169,157,0.22),_transparent_64%)]" />
+      <div className="absolute left-5 top-4 h-2 w-2 rounded-full bg-white shadow-card" />
+      <div className="absolute right-8 top-8 h-3 w-3 rounded-full border border-white/80" />
+      {isPrawn ? (
+        <div className="absolute left-1/2 top-1/2 h-20 w-28 -translate-x-1/2 -translate-y-1/2 rotate-[-18deg] rounded-full border-[12px] border-brand-orange border-l-transparent shadow-modal">
+          <span className="absolute -right-8 top-7 h-3 w-10 rounded-full bg-brand-orange" />
+          <span className="absolute -left-4 bottom-0 h-7 w-7 rounded-full bg-amber-300" />
+          <span className="absolute right-3 top-1 h-2 w-2 rounded-full bg-white" />
+        </div>
+      ) : (
+        <div className={`absolute left-1/2 top-1/2 h-20 w-40 -translate-x-1/2 -translate-y-1/2 rounded-[55%] bg-gradient-to-r ${fishTone} shadow-modal`}>
+          <span className="absolute -left-8 top-1/2 h-12 w-12 -translate-y-1/2 rotate-45 bg-brand-greenDark" />
+          <span className="absolute right-8 top-5 h-3 w-3 rounded-full bg-white/90" />
+          <span className="absolute left-10 top-1/2 h-1 w-24 -translate-y-1/2 rounded-full bg-white/30" />
+          <span className="absolute left-14 top-4 h-4 w-8 rounded-full bg-white/18" />
+        </div>
+      )}
+      <div className="absolute bottom-3 right-4 rounded-full bg-white/90 px-3 py-1 text-xs font-black text-brand-greenDark">
+        {type}
+      </div>
+    </div>
+  );
+}
+
+function PickleJar({ type }) {
+  const label =
+    {
+      fish: 'Fish',
+      prawn: 'Prawn',
+      tuna: 'Tuna',
+    }[type] || 'Pickle';
+
+  return (
+    <div className="relative h-40 w-28 animate-float-sea">
+      <div className="absolute left-1/2 top-0 h-6 w-20 -translate-x-1/2 rounded-t-xl bg-brand-greenDark shadow-card" />
+      <div className="absolute inset-x-2 top-5 h-32 overflow-hidden rounded-t-[2rem] rounded-b-xl border border-orange-200 bg-gradient-to-br from-orange-400 via-brand-orange to-amber-500 shadow-modal">
+        <div className="absolute inset-x-0 top-0 h-8 bg-white/24" />
+        <div className="absolute left-4 top-8 h-4 w-4 rounded-full bg-red-700/55" />
+        <div className="absolute right-5 top-14 h-3 w-3 rounded-full bg-yellow-200/65" />
+        <div className="absolute left-7 bottom-8 h-5 w-5 rounded-full bg-red-900/35" />
+        <div className="absolute inset-x-3 bottom-7 rounded-2xl bg-white px-2 py-2 text-center shadow-card">
+          <p className="text-[10px] font-black uppercase tracking-[0.14em] text-brand-greenDark">MFresh</p>
+          <p className="text-xs font-black text-brand-orange">{label}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function TodayCatch({ onShop }) {
   return (
     <section className="sea-section px-4 py-20 lg:px-8">
@@ -166,10 +213,10 @@ function TodayCatch({ onShop }) {
           ))}
         </div>
         <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {catchItems.map(([name, detail, price, slot, image], index) => (
+          {catchItems.map(([name, detail, price, slot, visual]) => (
             <article key={name} className="wave-card rounded-3xl border border-brand-border bg-white p-5 shadow-card transition hover:-translate-y-1 hover:shadow-modal">
               <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-cyan-50 to-blue-100">
-                <img src={image} alt={name} loading={index < 4 ? 'eager' : 'lazy'} className="h-40 w-full object-cover transition duration-500 hover:scale-105" />
+                <SeafoodVisual type={visual} />
               </div>
               <h3 className="relative z-10 mt-5 text-xl font-black text-brand-text">{name}</h3>
               <p className="relative z-10 mt-2 min-h-12 text-sm font-bold leading-6 text-brand-muted">{detail}</p>
@@ -224,10 +271,13 @@ function PicklesBrand() {
           </Link>
         </div>
         <div className="grid gap-4 md:grid-cols-3">
-          {pickleItems.map(([name, copy]) => (
-            <article key={name} className="rounded-3xl border border-orange-100 bg-white p-5 shadow-card">
-              <div className="flex h-40 items-end rounded-3xl bg-gradient-to-br from-orange-100 via-white to-cyan-50 p-4">
-                <div className="h-28 w-full rounded-t-[2rem] rounded-b-xl bg-gradient-to-br from-brand-orange to-amber-500 shadow-modal" />
+          {pickleItems.map(([name, copy, type], index) => (
+            <article key={name} className="pickle-card rounded-3xl border border-orange-100 bg-white p-5 shadow-card" style={{ animationDelay: `${index * 0.25}s` }}>
+              <div className="relative flex h-48 items-end justify-center overflow-hidden rounded-3xl bg-gradient-to-br from-orange-50 via-white to-cyan-50 p-4">
+                <span className="pickle-spice left-6 top-8" />
+                <span className="pickle-spice right-8 top-12" />
+                <span className="pickle-spice bottom-12 left-12" />
+                <PickleJar type={type} />
               </div>
               <h3 className="mt-5 text-xl font-black text-brand-text">{name}</h3>
               <p className="mt-2 text-sm font-bold leading-6 text-brand-muted">{copy}</p>
