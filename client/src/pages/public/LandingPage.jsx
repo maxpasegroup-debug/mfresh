@@ -2,10 +2,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import SeaHeroCanvas from '../../components/public/SeaHeroCanvas.jsx';
 
 const catchItems = [
-  ['Seer Fish', 'Premium steak or curry cut', 'Rs 780/kg', 'Today 6PM'],
-  ['King Prawns', 'Cleaned or shell-on', 'Rs 640/kg', 'Today 4PM'],
-  ['Karimeen', 'Whole or cleaned', 'Rs 520/kg', 'Tomorrow 8AM'],
-  ['Squid', 'Cleaned rings', 'Rs 420/kg', 'Today 6PM'],
+  ['Seer Fish', 'Premium steak or curry cut', 'Rs 699/kg', 'Available', 'https://commons.wikimedia.org/wiki/Special:FilePath/Scomberomorus_commerson.jpg?width=700'],
+  ['Tiger Prawns', 'Cleaned or shell-on', 'Rs 899/kg', 'Available', 'https://commons.wikimedia.org/wiki/Special:FilePath/Penaeus_monodon.jpg?width=700'],
+  ['Karimeen', 'Whole or cleaned', 'Rs 1199/kg', 'Available', 'https://commons.wikimedia.org/wiki/Special:FilePath/Etroplus_suratensis.jpg?width=700'],
+  ['Ayala', 'Cleaned or curry cut', 'Rs 249/kg', 'Limited', 'https://commons.wikimedia.org/wiki/Special:FilePath/Rastrelliger_kanagurta.jpg?width=700'],
 ];
 
 const journey = [
@@ -22,6 +22,15 @@ const pickleItems = [
 ];
 
 const trust = ['Fresh Seafood', 'From Malabar Coast', 'Made With Love', 'Fast Delivery', 'Trust & Quality'];
+
+const freshnessSignals = [
+  'Today\'s Catch',
+  '4 AM Procurement',
+  'Hygienically Cleaned',
+  'Chilled Delivery',
+  'Same Day Dispatch',
+  'Quality Checked',
+];
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -84,25 +93,41 @@ function Hero({ onOrder, onCatch }) {
             </div>
           </div>
 
-          <div className="sea-glass animate-float-sea rounded-[2rem] p-5 text-brand-text md:p-7">
-            <p className="text-sm font-black uppercase tracking-[0.22em] text-brand-green">Live ordering ritual</p>
-            <h2 className="mt-3 font-display text-4xl font-black">Pick. Clean. Slot. Cook.</h2>
-            <div className="mt-6 grid gap-3">
-              {[
-                ['Fish', 'Seer Fish'],
-                ['Weight', '1kg'],
-                ['Cleaning', 'Curry cut'],
-                ['Delivery', 'Today 6PM - 8PM'],
-              ].map(([label, value]) => (
-                <div key={label} className="flex items-center justify-between rounded-2xl bg-white/78 px-4 py-3 shadow-card">
-                  <span className="text-xs font-black uppercase tracking-[0.2em] text-brand-muted">{label}</span>
-                  <span className="font-black text-brand-text">{value}</span>
-                </div>
+          <div className="sea-glass rounded-[2rem] p-4 text-brand-text md:p-5">
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <p className="text-xs font-black uppercase tracking-[0.22em] text-brand-green">Today&apos;s Catch</p>
+                <h2 className="mt-2 font-display text-3xl font-black">Order fish now</h2>
+              </div>
+              <span className="rounded-full bg-brand-orange px-3 py-1 text-xs font-black text-white">Live</span>
+            </div>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              {catchItems.map(([name, detail, price, status, image], index) => (
+                <article key={name} className="overflow-hidden rounded-3xl bg-white shadow-card">
+                  <div className="relative h-28 bg-cyan-50">
+                    <img
+                      src={image}
+                      alt={name}
+                      loading={index < 2 ? 'eager' : 'lazy'}
+                      className="h-full w-full object-cover"
+                    />
+                    <span className={`absolute left-2 top-2 rounded-full px-2 py-1 text-[10px] font-black text-white ${status === 'Limited' ? 'bg-brand-orange' : 'bg-brand-green'}`}>
+                      {status}
+                    </span>
+                  </div>
+                  <div className="p-3">
+                    <h3 className="text-sm font-black text-brand-text">{name}</h3>
+                    <p className="mt-1 text-[11px] font-bold text-brand-muted">{detail}</p>
+                    <div className="mt-3 flex items-center justify-between gap-2">
+                      <span className="text-sm font-black text-brand-greenDark">{price}</span>
+                      <button type="button" onClick={onOrder} className="rounded-full bg-brand-green px-3 py-1 text-xs font-black text-white">
+                        Order
+                      </button>
+                    </div>
+                  </div>
+                </article>
               ))}
             </div>
-            <button type="button" onClick={onOrder} className="mt-5 w-full rounded-2xl bg-brand-green px-6 py-4 font-black text-white shadow-btn">
-              Add Fresh Catch
-            </button>
           </div>
         </div>
       </div>
@@ -114,7 +139,7 @@ function CatchTicker() {
   return (
     <div className="overflow-hidden bg-white py-4 text-sm font-black uppercase tracking-[0.18em] text-brand-greenDark shadow-card">
       <div className="whitespace-nowrap animate-[marquee_28s_linear_infinite]">
-        Morning catch confirmed | Hygienic cleaning | Chilled packing | MFresh Pickles exclusive | Same-day seafood slots | Love From Malabar
+        Today&apos;s Catch | 4 AM Procurement | Hygienically Cleaned | Chilled Delivery | Same Day Dispatch | Quality Checked | MFresh Pickles exclusive
       </div>
     </div>
   );
@@ -133,11 +158,18 @@ function TodayCatch({ onShop }) {
             Shop Seafood
           </button>
         </div>
+        <div className="mt-8 grid gap-3 rounded-4xl border border-brand-border bg-white p-4 shadow-card md:grid-cols-6">
+          {freshnessSignals.map((signal) => (
+            <div key={signal} className="rounded-2xl bg-brand-bg px-4 py-3 text-center text-xs font-black uppercase tracking-[0.1em] text-brand-greenDark">
+              {signal}
+            </div>
+          ))}
+        </div>
         <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {catchItems.map(([name, detail, price, slot]) => (
+          {catchItems.map(([name, detail, price, slot, image], index) => (
             <article key={name} className="wave-card rounded-3xl border border-brand-border bg-white p-5 shadow-card transition hover:-translate-y-1 hover:shadow-modal">
-              <div className="flex h-36 items-center justify-center rounded-3xl bg-gradient-to-br from-cyan-50 to-blue-100 text-4xl font-black text-brand-green">
-                {name.split(' ')[0]}
+              <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-cyan-50 to-blue-100">
+                <img src={image} alt={name} loading={index < 4 ? 'eager' : 'lazy'} className="h-40 w-full object-cover transition duration-500 hover:scale-105" />
               </div>
               <h3 className="relative z-10 mt-5 text-xl font-black text-brand-text">{name}</h3>
               <p className="relative z-10 mt-2 min-h-12 text-sm font-bold leading-6 text-brand-muted">{detail}</p>

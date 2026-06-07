@@ -1,12 +1,12 @@
 export const categories = [
-  ['Fish', 'Fresh Fish', '40+'],
-  ['Prawns', 'Prawns & Shrimp', '18+'],
-  ['Crab', 'Crab & Shellfish', '12+'],
-  ['Squid', 'Squid & Cuttlefish', '10+'],
-  ['Seer', 'Premium Cuts', '16+'],
-  ['Combo', 'Family Combos', '8+'],
-  ['Curry', 'Curry Cuts', '20+'],
-  ['Dry', 'Dry Fish', '14+'],
+  ['https://commons.wikimedia.org/wiki/Special:FilePath/Scomberomorus_commerson.jpg?width=700', 'Seer Fish', 'Available Today'],
+  ['https://commons.wikimedia.org/wiki/Special:FilePath/Etroplus_suratensis.jpg?width=700', 'Karimeen', 'Available Today'],
+  ['https://commons.wikimedia.org/wiki/Special:FilePath/Rastrelliger_kanagurta.jpg?width=700', 'Ayala', 'Limited Stock'],
+  ['https://commons.wikimedia.org/wiki/Special:FilePath/Penaeus_monodon.jpg?width=700', 'Tiger Prawns', 'Available Today'],
+  ['https://commons.wikimedia.org/wiki/Special:FilePath/Sepia_officinalis2.jpg?width=700', 'Squid & Cuttlefish', 'Fresh Batch'],
+  ['https://commons.wikimedia.org/wiki/Special:FilePath/Scylla_serrata.jpg?width=700', 'Crab', 'Pre-order'],
+  ['Curry', 'Curry Cuts', 'Ready to Cook'],
+  ['Pickle', 'MFresh Pickles', 'Exclusive'],
 ];
 
 export const features = [
