@@ -1,11 +1,9 @@
-# Malabarii Deployment
+# MFresh Deployment
 
 ## Railway
 
-- Project name: `malabarii`
-- Project URL: pending Railway project creation
-- Live app URL: pending Railway domain assignment
-- PostgreSQL: Railway PostgreSQL service, host and database provided by Railway
+- Project name: `mfresh`
+- PostgreSQL: Railway PostgreSQL service connected to the app service
 
 Do not commit Railway database passwords or full connection strings.
 
@@ -45,12 +43,6 @@ railway run <cmd>
 railway run node server/src/scripts/createAdmin.js <mobile> <pin>
 ```
 
-Example:
-
-```bash
-railway run node server/src/scripts/createAdmin.js 9999999999 1234
-```
-
 ## Deployment Flow
 
 ```bash
@@ -62,5 +54,3 @@ railway up
 railway run npm run db:migrate
 railway run npm run db:seed
 ```
-
-After the first successful deploy, set `CLIENT_URL` and `VITE_API_URL` to the assigned Railway domain and redeploy.

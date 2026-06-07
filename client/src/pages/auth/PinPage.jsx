@@ -49,7 +49,7 @@ export default function PinPage() {
     <div className="space-y-6">
       <div>
         <h2 className="font-display text-3xl font-black text-brand-text">Enter PIN 🔑</h2>
-        <p className="mt-2 text-sm font-semibold text-brand-muted">Unlock your Malabarii account</p>
+        <p className="mt-2 text-sm font-semibold text-brand-muted">Unlock your MFresh account</p>
       </div>
       <PinInput value={pin} onChange={changePin} />
       <button type="button" onClick={forgotPin} className="w-full text-sm font-bold text-brand-orange">

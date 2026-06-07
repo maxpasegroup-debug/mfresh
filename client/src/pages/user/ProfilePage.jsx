@@ -5,7 +5,7 @@ import { useAuthStore } from '../../store/authStore.js';
 
 const accountItems = ['My Addresses', 'Payment Methods', 'Notifications'];
 const hotelItems = ['GST Invoices', 'Bulk Orders', 'Credit Limit'];
-const appItems = ['About Malabarii', 'Help & Support', 'Rate the App'];
+const appItems = ['About MFresh', 'Help & Support', 'Rate the App'];
 
 export default function ProfilePage() {
   const { user, logout, switchMode } = useAuthStore();
@@ -21,7 +21,7 @@ export default function ProfilePage() {
             {initial}
           </div>
           <div>
-            <h1 className="font-display text-3xl font-black">{user?.name || 'Malabarii User'}</h1>
+            <h1 className="font-display text-3xl font-black">{user?.name || 'MFresh User'}</h1>
             <p className="text-sm font-bold text-white/80">+91 {user?.mobile}</p>
           </div>
         </div>
@@ -64,7 +64,7 @@ export default function ProfilePage() {
         <Button variant="danger" fullWidth onClick={logout}>
           Sign Out
         </Button>
-        <p className="pb-6 text-center text-xs font-bold text-brand-muted">Malabarii v0.1.0</p>
+        <p className="pb-6 text-center text-xs font-bold text-brand-muted">MFresh v0.1.0</p>
       </section>
 
       <Modal isOpen={Boolean(modal)} onClose={() => setModal(null)} title={modal || ''}>

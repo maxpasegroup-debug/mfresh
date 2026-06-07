@@ -10,7 +10,7 @@ async function start() {
   try {
     await query('SELECT 1');
     app.listen(port, () => {
-      console.log('Malabarii server running');
+      console.log('MFresh server running');
       console.log(`   Mode:    ${process.env.NODE_ENV || 'development'}`);
       console.log(`   Port:    ${port}`);
       console.log('   DB:      connected OK');

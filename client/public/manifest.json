@@ -1,11 +1,11 @@
 {
-  "name": "Malabarii",
-  "short_name": "Malabarii",
-  "description": "Good Food Rich Life",
+  "name": "MFresh",
+  "short_name": "MFresh",
+  "description": "Fresh seafood delivery from the Malabar coast",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1a6b2f",
-  "theme_color": "#1a6b2f",
+  "background_color": "#001727",
+  "theme_color": "#001727",
   "orientation": "portrait",
   "icons": [
     {

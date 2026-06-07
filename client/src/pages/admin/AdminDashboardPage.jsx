@@ -11,7 +11,7 @@ export default function AdminDashboardPage() {
 
   return (
     <>
-      <TopHeader title="Admin Panel" subtitle="Malabarii Control Centre" variant="dark" />
+      <TopHeader title="Admin Panel" subtitle="MFresh Control Centre" variant="dark" />
       <section className="section space-y-4">
         <div className="grid grid-cols-2 gap-3">
           <StatCard emoji="📦" value={loading ? '...' : stats?.total_orders || 0} label="Total Orders" change={`Today ${stats?.today?.orders || 0}`} />
